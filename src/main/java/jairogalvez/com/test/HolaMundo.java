@@ -9,7 +9,7 @@ public class HolaMundo {
 
     @GetMapping
     public String holaMundo(){
-        return "hola como estas";
+        return "hola como estas jajaj";
     }
 
 }
