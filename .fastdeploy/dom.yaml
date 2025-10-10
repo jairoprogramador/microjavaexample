@@ -11,7 +11,7 @@ project:
     description: my project
     team: shikigami
 template:
-    repository_url: https://github.com/jairoprogramador/mydeploy.git
+    repository_url: https://github.com/jairoprogramador/mydeploytest.git
     ref: main
 technology:
     type: backend
