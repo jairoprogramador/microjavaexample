@@ -3,7 +3,7 @@ product:
     name: test
     description: my product
     team: zenin
-    organization: fastdeploy
+    organization: fastdeploydd
 project:
     project_id: f715d980d7673c6ff21ec2ec1642799d142b3fe4182d8fe2912f637d2e603ebc
     name: test
