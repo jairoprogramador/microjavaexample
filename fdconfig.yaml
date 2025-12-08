@@ -6,7 +6,7 @@ project:
     description: mi despliegue con fastdeploy
     organization: fastdeploy
 template:
-    url: https://github.com/jairoprogramador/mydeploytest.git
+    url: https://github.com/jairoprogramador/mydeploy.git
     ref: main
 runtime:
     image:
