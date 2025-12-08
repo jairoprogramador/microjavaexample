@@ -4,7 +4,7 @@ ARG MAVEN_VERSION="3.9.11"
 ARG TERRAFORM_VERSION="1.13.3"
 ARG KUBECTL_VERSION="1.34.1"
 ARG KUBELOGIN_VERSION="0.2.12"
-ARG FASTDEPLOY_VERSION="1.0.5"
+ARG FASTDEPLOY_VERSION="1.0.6"
 ARG DOCKER_VERSION="28.5.1"
 ARG DEV_GID=1001
 
@@ -24,10 +24,10 @@ RUN apt-get update && \
     unzip \
     wget \
     git \
-    # Java (OpenJDK 17) \
+    # Java (OpenJDK 17)
     openjdk-17-jdk \
     && \
-    # --- INSTALACIÓN DE MAVEN --- \
+    # --- INSTALACIÓN DE MAVEN ---
     wget "https://dlcdn.apache.org/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz" -O /tmp/maven.tar.gz && \
     tar -xzf "/tmp/maven.tar.gz" -C /usr/share/ && \
     ln -s "/usr/share/apache-maven-${MAVEN_VERSION}" /usr/share/maven && \
@@ -37,33 +37,31 @@ RUN apt-get update && \
     tar -xzf /tmp/docker.tgz -C /tmp && \
     mv /tmp/docker/docker /usr/local/bin/ && \
     rm -rf /tmp/docker.tgz /tmp/docker && \
-    # --- INSTALACIÓN DE TERRAFORM --- \
+    # --- INSTALACIÓN DE TERRAFORM ---
     wget "https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip" -O /tmp/terraform.zip && \
     unzip /tmp/terraform.zip -d /usr/local/bin/ && \
     rm "/tmp/terraform.zip" && \
-    # --- INSTALACIÓN DE AZURE CLI --- \
+    # --- INSTALACIÓN DE AZURE CLI ---
     curl -sL https://aka.ms/InstallAzureCLIDeb | bash && \
     # --- INSTALACIÓN DE KUBELOGIN --- \
     wget "https://github.com/Azure/kubelogin/releases/download/v${KUBELOGIN_VERSION}/kubelogin-linux-amd64.zip" -O /tmp/kubelogin.zip && \
     unzip /tmp/kubelogin.zip -d /tmp && \
     mv /tmp/bin/linux_amd64/kubelogin /usr/local/bin && \
     rm -rf /tmp/kubelogin.zip /tmp/bin && \
-    # --- INSTALACIÓN DE KUBECTL --- \
+    # --- INSTALACIÓN DE KUBECTL ---
     wget "https://dl.k8s.io/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl" -O /usr/local/bin/kubectl && \
-    chmod +x /usr/local/bin/kubectl && \
-    # --- INSTALACIÓN DE FASTDEPLOY --- \
-#    wget "https://github.com/jairoprogramador/fastdeploy/releases/download/v${FASTDEPLOY_VERSION}/fastdeploy_${FASTDEPLOY_VERSION}_linux_amd64.tar.gz" -O /tmp/fastdeploy.tar.gz && \
-#    tar -xzf "/tmp/fastdeploy.tar.gz" -C /tmp && \
-#    mv /tmp/fd /usr/local/bin/ && \
-#    chmod 755 /usr/local/bin/fd && \
-#    rm /tmp/fastdeploy.tar.gz \
-#    && \
-    # --- LIMPIEZA --- \
+    chmod +x /usr/local/bin/kubectl \
+    && \
+    # --- INSTALACIÓN DE FASTDEPLOY ---
+    wget "https://github.com/jairoprogramador/fastdeploy-core/releases/download/v${FASTDEPLOY_VERSION}/fastdeploy-core_linux_amd64.tar.gz" -O /tmp/fastdeploy.tar.gz && \
+    tar -xzf "/tmp/fastdeploy.tar.gz" -C /tmp && \
+    mv /tmp/fd /usr/local/bin/ && \
+    chmod 755 /usr/local/bin/fd && \
+    rm /tmp/fastdeploy.tar.gz \
+    && \
+    # --- LIMPIEZA ---
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
-
-COPY fd /usr/local/bin/fd
-RUN chmod +x /usr/local/bin/fd
 
 USER fastdeploy
 
