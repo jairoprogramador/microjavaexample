@@ -1,0 +1,35 @@
+project:
+    id: 9d8d4777570703b3e636d6f8433b7a344cb691655aa3cd1fb2637f6182065b66
+    name: test
+    team: shikigami
+    description: mi despliegue con vex
+    organization: vex
+template:
+    url: https://github.com/jairoprogramador/mydeploy.git
+    ref: main
+runtime:
+    image: Dockerfile
+    tag: latest
+    build:
+        args:
+            - name: "VEX_VERSION"
+              value: "1.0.15"
+            - name: "MAVEN_VERSION"
+              value: "3.9.12"
+    run:
+        volumes:
+            - host: "/Users/jailux/.m2"
+              container: "/home/vex/.m2"
+            - host: "/Users/jailux/Workspace/SpringBoot/test"
+              container: "/home/vex/app"
+            - host: "/Users/jailux/.vex"
+              container: "/home/vex/.vex"
+        envs:
+            - name: "ARM_CLIENT_ID"
+              value: "$ARM_CLIENT_ID"
+            - name: "ARM_CLIENT_SECRET"
+              value: "$ARM_CLIENT_SECRET"
+            - name: "ARM_TENANT_ID"
+              value: "$ARM_TENANT_ID"
+            - name: "ARM_SUBSCRIPTION_ID"
+              value: "$ARM_SUBSCRIPTION_ID"
