@@ -14,6 +14,8 @@ target/
 .settings
 .springBeans
 .sts4-cache
+.DS_Store
+vex
 fd
 
 ### IntelliJ IDEA ###

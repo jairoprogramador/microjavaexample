@@ -5,10 +5,10 @@ project:
     description: mi despliegue con vex
     organization: vex
 template:
-    url: https://github.com/jairoprogramador/mydeploy.git
+    url: https://github.com/jairoprogramador/vex-tpl-springboot-azure-basic
     ref: main
 runtime:
-    image: Dockerfile
+    image: jairoprogramador/vex-runtime-springboot-azure
     tag: latest
     build:
         args:
@@ -18,18 +18,18 @@ runtime:
               value: "3.9.12"
     run:
         volumes:
-            - host: "/Users/jailux/.m2"
+            - host: "C:/Users/jailux/.m2"
               container: "/home/vex/.m2"
-            - host: "/Users/jailux/Workspace/SpringBoot/test"
+            - host: "C:/Users/jailux/demo"
               container: "/home/vex/app"
-            - host: "/Users/jailux/.vex"
+            - host: "C:/Users/jailux/.vex"
               container: "/home/vex/.vex"
         envs:
             - name: "ARM_CLIENT_ID"
-              value: "$ARM_CLIENT_ID"
+              value: "%ARM_CLIENT_ID%"
             - name: "ARM_CLIENT_SECRET"
-              value: "$ARM_CLIENT_SECRET"
+              value: "%ARM_CLIENT_SECRET%"
             - name: "ARM_TENANT_ID"
-              value: "$ARM_TENANT_ID"
+              value: "%ARM_TENANT_ID%"
             - name: "ARM_SUBSCRIPTION_ID"
-              value: "$ARM_SUBSCRIPTION_ID"
+              value: "%ARM_SUBSCRIPTION_ID%"
