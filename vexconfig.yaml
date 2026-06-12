@@ -1,35 +1,40 @@
 project:
-    id: 9d8d4777570703b3e636d6f8433b7a344cb691655aa3cd1fb2637f6182065b66
+    id: 9d8d4777-5707-43b3-a636-d6f8433b7a34
     name: test
     team: shikigami
     description: mi despliegue con vex
     organization: vex
-template:
+    url: https://github.com/jairoprogramador/microjavaexample.git
+    ref: develop
+pipeline:
     url: https://github.com/jairoprogramador/vex-tpl-springboot-azure-basic
-    ref: main
+    ref: develop
 runtime:
-    image: jairoprogramador/vex-runtime-springboot-azure
-    tag: latest
+    #image: jairoprogramador/vex-runtime-springboot-azure:latest
+    image: Dockerfile
     build:
         args:
-            - name: "VEX_VERSION"
-              value: "1.0.15"
-            - name: "MAVEN_VERSION"
-              value: "3.9.12"
+            - name: VEX_VERSION
+              value: 1.0.21
+            - name: MAVEN_VERSION
+              value: 3.9.12
     run:
         volumes:
-            - host: "C:/Users/jailux/.m2"
+            - host: "/Users/jailux/.m2"
               container: "/home/vex/.m2"
-            - host: "C:/Users/jailux/demo"
-              container: "/home/vex/app"
-            - host: "C:/Users/jailux/.vex"
-              container: "/home/vex/.vex"
         envs:
             - name: "ARM_CLIENT_ID"
-              value: "%ARM_CLIENT_ID%"
+              value: "$ARM_CLIENT_ID"
             - name: "ARM_CLIENT_SECRET"
-              value: "%ARM_CLIENT_SECRET%"
+              value: "$ARM_CLIENT_SECRET"
             - name: "ARM_TENANT_ID"
-              value: "%ARM_TENANT_ID%"
+              value: "$ARM_TENANT_ID"
             - name: "ARM_SUBSCRIPTION_ID"
-              value: "%ARM_SUBSCRIPTION_ID%"
+              value: "$ARM_SUBSCRIPTION_ID"
+            - name: "TF_STATE_RESOURCE_GROUP"
+              value: "$TF_STATE_RESOURCE_GROUP"
+            - name: "TF_STATE_STORAGE_ACCOUNT"
+              value: "$TF_STATE_STORAGE_ACCOUNT"
+            - name: "TF_STATE_CONTAINER"
+              value: "$TF_STATE_CONTAINER"
+mode: local
