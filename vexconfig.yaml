@@ -7,11 +7,10 @@ project:
     url: https://github.com/jairoprogramador/microjavaexample.git
     ref: develop
 pipeline:
-    url: https://github.com/jairoprogramador/vex-tpl-springboot-azure-basic
-    ref: develop
+    url: https://github.com/jairoprogramador/vex-tpl-test.git
+    ref: main
 runtime:
-    #image: jairoprogramador/vex-runtime-springboot-azure:latest
-    image: Dockerfile
+    image: jairoprogramador/vex-runtime-springboot-azure:latest
     build:
         args:
             - name: VEX_VERSION
@@ -22,6 +21,8 @@ runtime:
         volumes:
             - host: "/Users/jailux/.m2"
               container: "/home/vex/.m2"
+            - host: "/Users/jailux/.vex"
+              container: "/home/vex/.vex"
         envs:
             - name: "ARM_CLIENT_ID"
               value: "$ARM_CLIENT_ID"
@@ -37,4 +38,3 @@ runtime:
               value: "$TF_STATE_STORAGE_ACCOUNT"
             - name: "TF_STATE_CONTAINER"
               value: "$TF_STATE_CONTAINER"
-mode: local
